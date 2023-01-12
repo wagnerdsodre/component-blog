@@ -9,3 +9,40 @@
   display: flex;
   align-items: flex-end;
 }
+
+.search {
+  display: flex;
+  min-height: 30px;
+  background: #eee;
+  padding: 15px;
+}
+
+.search {
+  flex-direction: row;
+  min-height: 30px;
+  min-width: 100%;
+  justify-content: center;
+  align-items: center;
+  background: #eee;
+  padding: 10px auto;
+  margin: 10px auto;
+}
+.search > label {
+  min-height: 30px;
+  min-width: 20%;
+  justify-content: center;
+  align-items: flex-start;
+  background: #eee;
+  padding: 2px auto;
+  margin: 2px auto;
+}
+.search > input {
+  min-height: 30px;
+  min-width: 80%;
+  flex-grow: initial;
+  justify-content: center;
+  align-items: flex-end;
+  background: #eee;
+  padding: 2px auto;
+  margin: 2px auto;
+}

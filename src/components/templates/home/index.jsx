@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Button } from '../../Button';
+import { InputComponent } from '../../InputComponent';
 import { loadPosts } from './../../Data/DataPosts';
 import { Posts } from './../../Posts';
 import './styles.css';
@@ -10,7 +11,8 @@ state = {
   posts:[ ],
   allPosts:[ ],
   page:0,
-  postsPerPage:2  
+  postsPerPage:2,
+  searchText:''  
 }
 
 async componentDidMount(){
@@ -34,22 +36,57 @@ loadMorePosts = () => {
  this.setState({posts, page: nextPage })
 }
 
+handleChange = (e) => {
+const { value } = e.target;
+this.setState({searchText: value});
+}
+
 
 render(){
-  const { posts, postsPerPage, allPosts } = this.state;
+  const { posts, postsPerPage, allPosts, searchText } = this.state;
   const noMorePost = posts + postsPerPage >= allPosts.length;
+   
+  const filterPost = !!searchText ? 
+  allPosts.filter(post => {
+    return post.title.toLowerCase().includes(
+      searchText.toLowerCase()
+    );
+  }):
+  posts;
   
-  return (
+  
+return (
     <section className="container">
-    <Posts posts={posts} />
-    <Button
+         {!!searchText && (
+          <>
+          <h2> Search: {searchText}</h2>
+          </>
+        )}
+      
+      <div className="search">
+         <label>Search</label>
+       <InputComponent 
+       searchText={searchText} 
+       handleChange={this.handleChange}
+       placeholder="Enter your text"
+      />
+         
+      </div>
+
+      {filterPost.length > 0 && (
+      <Posts posts={filterPost} /> 
+      ) }
+
+   
+    {!searchText && (
+      
+     <Button
      text = "Load posts"
      onClick = {this.loadMorePosts}
-     disabled = {noMorePost}
-    
-    />
-
-    
+     disabled = {noMorePost} />
+      
+    )}
+        
     </section>
   );
 }
