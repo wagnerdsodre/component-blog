@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Component Started with React App
 
 This project [DEPLOY](https://meek-rolypoly-163d13.netlify.app/).
 
